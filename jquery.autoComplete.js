@@ -120,7 +120,7 @@ $.fn.autoComplete = function(options) {
                         'mouseleave.autoComplete': function() {
                             $input.trigger('itemBlur', [this]);
                         },
-                        'click.autoComplete': function() {
+                        'mousedown.autoComplete': function() {
                             $input.trigger('itemSelect', [this]);
                         }
                     })
@@ -135,10 +135,10 @@ $.fn.autoComplete = function(options) {
             },
             itemSelect: function(e, li) {
                 var text = replaceTerm($input.val(), $(li).text());
-                $input
-                    .val(text)
-                    .trigger('inputBlur')
-                    .focus();
+                $input.val(text).trigger('inputBlur');
+                setTimeout(function() {
+                    $input.focus();
+                }, 0);
                 oldCharacterCount = text.length;
             },
             inputBlur: function(e) {
@@ -147,10 +147,7 @@ $.fn.autoComplete = function(options) {
         });
 
         $(document)
-            .bind('click focusin', function(e) {
-                if (!$results.is(':visible')) return;
-                var target = e.target;
-                if (target == $results[0] || target == $input[0]) return;
+            .bind('mouseup focusin', function(e) {
                 $input.trigger('inputBlur');
             });
     });
