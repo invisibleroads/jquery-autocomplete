@@ -7,13 +7,13 @@ $.fn.autoComplete = function(options) {
     }
 
     options = $.extend({}, {
-        delay: 125,
-        filter: filterStrings,
-        formatResult: function(x) {return x},
-        maxResultCount: 10,
-        minCharacterCount: 2,
-        separator: null,
-        sourcePacks: []
+        delay:125,
+        filter:filterStrings,
+        formatResult:function(x) {return x},
+        maxResultCount:10,
+        minCharacterCount:2,
+        separator:null,
+        sourcePacks:[]
     }, options);
 
     // Make results container if it does not exist already
@@ -102,7 +102,7 @@ $.fn.autoComplete = function(options) {
                         return false;
                     }
                 },
-                'autoPrompt.ac': function() {
+                'autoPrompt.ac':function() {
                     var text = $input.val();
                     var results = options.filter(options.sourcePacks, extractTerm(text)).splice(0, options.maxResultCount);
                     if (!results.length) {
@@ -112,32 +112,32 @@ $.fn.autoComplete = function(options) {
                     $results
                         .html($.map(results, function(x) {return '<li>' + options.formatResult(x) + '</li>'}).join(''))
                         .css({
-                            position: 'absolute',
-                            top: function() {return $input.offset().top + $input.height()},
-                            left: function() {return $input.offset().left}
+                            position:'absolute',
+                            top:function() {return $input.offset().top + $input.height()},
+                            left:function() {return $input.offset().left}
                         })
                         .undelegate('.ac')
                         .delegate('li', {
-                            'mouseenter.ac': function() {
+                            'mouseenter.ac':function() {
                                 shiftFocus($(this).prevAll().length);
                             },
-                            'mouseleave.ac': function() {
+                            'mouseleave.ac':function() {
                                 $input.trigger('itemBlur', [this]);
                             },
-                            'mousedown.ac': function() {
+                            'mousedown.ac':function() {
                                 $input.trigger('itemSelect', [this]);
                             }
                         })
                         .show();
                     shiftFocus(0);
                 },
-                'itemFocus.ac': function(e, li) {
+                'itemFocus.ac':function(e, li) {
                     $(li).addClass('autoCompleteSelection');
                 },
-                'itemBlur.ac': function(e, li) {
+                'itemBlur.ac':function(e, li) {
                     $(li).removeClass('autoCompleteSelection');
                 },
-                'itemSelect.ac': function(e, li) {
+                'itemSelect.ac':function(e, li) {
                     var text = replaceTerm($input.val(), $(li).text());
                     $input.val(text).trigger('inputBlur');
                     setTimeout(function() {
@@ -145,7 +145,7 @@ $.fn.autoComplete = function(options) {
                     }, 0);
                     oldCharacterCount = text.length;
                 },
-                'inputBlur.ac': function(e) {
+                'inputBlur.ac':function(e) {
                     $results.hide();
                 }
             });
