@@ -25,11 +25,11 @@ $.fn.autoComplete = function(options) {
     var separator = options.separator, extractTerm, replaceTerm;
     if (separator) {
         extractTerm = function(text) {
-            var terms = text.split($.trim(separator));
+            var terms = text.split(separator);
             return $.trim(terms[terms.length - 1]);
         };
         replaceTerm = function(text, term) {
-            var terms = text.split($.trim(separator));
+            var terms = text.split(separator);
             terms[terms.length - 1] = term;
             return $.map(terms, $.trim).join(separator) + separator;
         };
