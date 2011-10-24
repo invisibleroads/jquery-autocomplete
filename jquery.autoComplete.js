@@ -9,7 +9,7 @@ $.fn.autoComplete = function(options) {
     options = $.extend({}, {
         delay:125,
         filter:filterStrings,
-        formatResult:function(x) {return x},
+        formatResult:function(x) {return escape(x)},
         maxResultCount:10,
         minCharacterCount:2,
         separator:null,
