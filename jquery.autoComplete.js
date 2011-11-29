@@ -59,6 +59,7 @@ $.fn.autoComplete = function(options) {
         }
 
         $input
+            .prop('autocomplete', 'off')
             .unbind('.ac')
             .bind({
                 'keyup.ac':function(e) {
