@@ -3,7 +3,7 @@
 <head>
 <title>AutoComplete Examples</title>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
-<script src='jquery.autoComplete.min.js'></script>
+<script src='jquery.autoComplete.js'></script>
 <style>
 #autoCompleteResults {
     list-style:none; 
@@ -22,32 +22,28 @@
 </style>
 </head>
 <body>
-<input id=example1><br>
+<input id=example1><input id=example1Switch type=button value=Switch><br>
 <textarea id=example2></textarea>
 <script>
+var fruits1 = ['Apple', 'Banana', 'Blueberry', 'Grapefruit', 'Orange', 'Strawberry'];
+var fruits2 = ['Avocado', 'Guava', 'Kiwi', 'Mango', 'Papaya', 'Pineapple', 'Pomegranate'];
+var fruits = fruits1;
 $('#example1').autoComplete({
+    formatResult:function(x) {return /an/.test(x) ? '<b>' + x + '</b>' : x},
     minCharacterCount:1,
-    sourcePacks:['Avocado', 'Banana', 'Orange', 'Mango']
+    source:'fruits'
 }).focus();
+$('#example1Switch').click(function() {
+    fruits = fruits == fruits1 ? fruits2 : fruits1;
+    $('#example1').focus();
+});
+
+var countries = ['Canada', 'Guam', 'Guadeloupe', 'Guatemala', 'India', 'Indonesia', 'Lebanon', 'Libya', 'Mexico', 'United States'];
 $('#example2').autoComplete({
     delay:250,
     maxResultCount:5,
     separator:'; ',
-    sourcePacks:[
-        'Aruba',
-        'Canada', 
-        'Cuba',
-        'Ghana',
-        'Guam',
-        'Guadeloupe',
-        'Guatemala',
-        'India',
-        'Indonesia',
-        'Libya',
-        'Liberia',
-        'Mexico',
-        'United States'
-    ]
+    source:countries
 });
 </script>
 </body>

@@ -13,7 +13,7 @@ $.fn.autoComplete = function(options) {
         maxResultCount:10,
         minCharacterCount:2,
         separator:null,
-        sourcePacks:[]
+        source:[]
     }, options);
 
     // Make results container if it does not exist already
@@ -104,8 +104,10 @@ $.fn.autoComplete = function(options) {
                     }
                 },
                 'autoPrompt.ac':function() {
-                    var text = $input.val();
-                    var results = options.filter(options.sourcePacks, extractTerm(text)).splice(0, options.maxResultCount);
+                    var text = $input.val(), 
+                        source = options.source, 
+                        items = 'string' == typeof(source) ? eval(source) : source,
+                        results = options.filter(items, extractTerm(text)).splice(0, options.maxResultCount);
                     if (!results.length) {
                         $results.hide();
                         return;
