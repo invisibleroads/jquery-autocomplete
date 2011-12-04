@@ -60,8 +60,8 @@ $.fn.autoComplete = function(options) {
 
         $input
             .prop('autocomplete', 'off')
-            .unbind('.ac')
-            .bind({
+            .off('.ac')
+            .on({
                 'keyup.ac':function(e) {
                     var keyCode = e.keyCode;
                     if (keyCode == 40) {
@@ -154,8 +154,8 @@ $.fn.autoComplete = function(options) {
             });
 
         $(document)
-            .unbind('.ac')
-            .bind('mouseup.ac focusin.ac', function(e) {
+            .off('.ac')
+            .on('mouseup.ac focusin.ac', function(e) {
                 $input.trigger('inputBlur');
             });
     });
